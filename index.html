@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html manifest="OfflineApp.manifest">
+<head>
+<meta charset="utf-8">
+<title>Chart</title>
+<meta name="generator" content="NSB/AppStudio 3.0.8$qmwh" />
+<meta name="date" content="2013-11-30 00:21:23.139000" />
+<meta name="version" content="1.0.0" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=0.6667, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="YES" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="copyright" content="Copyright 2012 ABC Company" />
+<link rel="apple-touch-icon" href="nsb/images/LauncherIcon57.png" />
+<link rel="apple-touch-startup-image" href="nsb/images/SplashScreen.png" />
+<script src="messages.js"></script>
+<script src="nsb/hfunc.js"></script>
+<link href="nsb/nsbstyle.css" rel="stylesheet">
+<script src="nsb/jquery.js"></script>
+<script src="nsb/jquery.mobile.js"></script>
+<link href="nsb/jquery.mobile.css" rel="stylesheet">
+<script src="nsb/jqwidgets/jqxcore.js"></script>
+<link href="nsb/jqwidgets/styles/jqx.base.css" rel="stylesheet">
+<link href="nsb/jqwidgets/styles/jqx.classic.css" rel="stylesheet">
+<script src="nsb/jqwidgets/jqxchart.js"></script>
+<script src="nsb/jqwidgets/jqxdata.js"></script>
+
+
+<style type="text/css">
+#Button1 {position:absolute; left:218px; top:295px; height:32px; width:173px}
+#Chart2_wrapper {position:absolute; left:16px; top:57px; height:220px; width:566px}
+#Chart2 {position:relative; left:0px; top:0px; height:100%; width:100%}
+body * {font-family:helvetica}
+</style>
+</head>
+<body style="margin:0px;background-image:url('nsb/images/backgroundStripes.png');">
+<div data-role="page" id="Page_Chart" data-theme="c" style="background-image:url('nsb/images/backgroundStripes.png')">
+<form id="Form1" action="" method="GET" onsubmit="return false;" style="display:none; height:100%;position:absolute; top:0px; left:0px; width:600px; ">
+<div id="Button1" data-role='button' data-inline=true data-theme=c data-icon=false data-iconpos=none data-mini=true class=" " style="margin:0px; overflow:visible; font-size:12px; font-family:helvetica; font-style:normal; font-weight:bold; color:; background-color:; ">Show Chart</div>
+<div id='Chart2_wrapper' style='background-color:white;'><div id='Chart2'></div></div>
+<script>
+Chart2_settings={'title':'Ketogenic diet follow up', 'borderLineColor':'', 'background':'white',
+'description':'One week patient feedback - SAMPLE data', 'padding':{ left: 5, top: 5, right: 5, bottom: 5 }, 'titlePadding':{ left: 2, top: 2, right: 2, bottom: 2 },
+'colorScheme':'scheme01', 'showLegend':'false', 'enabled':'true',
+'showToolTips':'true', 'toolTipDelay':'500' }
+</script>
+</form>
+</div>
+<script>
+if ('Please use Google Chrome, Apple Safari or another supported browser.') {
+  if ((!navigator.vendor) || ((navigator.vendor.indexOf('Apple') === -1) && (navigator.vendor.indexOf('Google') === -1) && (navigator.vendor.indexOf('Research') === -1))) {
+    alert('Please use Google Chrome, Apple Safari or another supported browser. (' + navigator.vendor + ')');
+  }
+}
+
+if (navigator.userAgent.indexOf('iPad') !== -1) {
+  var splashscreen = document.createElement('link');
+  splashscreen.rel = 'apple-touch-startup-image';
+  splashscreen.href = '';
+  document.getElementsByTagName('head')[0].appendChild(splashscreen);
+}
+
+window.addEventListener('load', function() {
+  Form1.style.display = 'block';
+  NSB_addDisableProperty(Button1);
+  NSB.addProperties(Button1);
+Chart2.style.position='relative';
+NSB.addProperties(Chart2,Chart2_wrapper);
+  Form1.style.display = 'none';
+}, false);
+if(!''){
+  Form1.onsubmit=function(event){
+    window.event.cancelBubble=true;
+    window.event.returnValue=false}};
+NSB.addProperties(Form1);
+
+if(typeof(jQuery.jqx)!="object") {
+  _msgbox_confirm("The jqWidgets library needs to be installed. Download it from http://www.jqwidgets.com/download/, unzip it and copy its 'jqwidgets' folder into your project folder.");
+}
+
+var  sampleData = [
+      { Day:'Monday', Heigth:80, Weigth:65, Seizures: 30},
+      { Day:'Tuesday', Heigth:81, Weigth:68, Seizures: 28},
+      { Day:'Wednesday', Heigth:80.5, Weigth:65, Seizures: 25},
+      { Day:'Thursday', Heigth:81, Weigth:65, Seizures: 20},
+      { Day:'Friday', Heigth:80, Weigth:67, Seizures: 17},
+      { Day:'Saturday', Heigth:81, Weigth:68, Seizures: 15},
+      { Day:'Sunday', Heigth:80, Weigth:70, Seizures: 12}
+  ];
+				
+Chart2_settings.source = sampleData;
+Chart2_settings.categoryAxis = {
+            dataField: 'Day',
+            showGridLines: false};
+Chart2_settings.seriesGroups =
+        [
+            {
+                type: 'line',
+                columnsGapPercent: 30,
+                seriesGapPercent: 0,
+                valueAxis:
+                {
+                    minValue: 0,
+                    maxValue: 100,
+                    unitInterval: 10,
+                    description: 'Time in minutes'
+                },
+                series: [
+                        { dataField: 'Heigth', displayText: 'Heigth'},
+                        { dataField: 'Weigth', displayText: 'Weigth'},
+                        { dataField: 'Seizures', displayText: 'Seizures'}
+                    ]
+            }
+        ]
+Button1.onclick = function() { savethefunction_rvar="";
+ //Render the chart.
+  $("#Chart2").jqxChart(Chart2_settings);
+return savethefunction_rvar; }
+
+
+window.addEventListener('load', function() {
+  Form1.style.display = 'block';
+  if (typeof(Form1.onshow)=='function') {Form1.onshow()};
+  Main();
+}, false);
+
+var NSBCurrentForm = Form1;
+</script>
+</body>
+</html>
